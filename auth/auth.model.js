@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
-
+//mongoose.set('useCreateIndex',true);
 const personSchema = new Schema({
     name: {
         type: String,
@@ -72,7 +72,11 @@ const userSchema = new Schema({
 },{
     timestamp: true
 });
-
+/*
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
+*/
+
+module.exports =userSchema;
