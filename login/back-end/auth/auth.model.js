@@ -18,6 +18,8 @@ const personSchema = new Schema({
         required: true,
         trim : true
     }
+},{
+    _id: false
 });
 
 const employeeSchema = new Schema({
@@ -36,9 +38,12 @@ const employeeSchema = new Schema({
         required: true,
         trim : true
     }
+},{
+    _id: false
 });
 
 const userSchema = new Schema({
+    
     user_type: {
         type: String,
         required: true,

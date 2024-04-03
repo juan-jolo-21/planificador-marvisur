@@ -67,6 +67,7 @@ const AuthController = {
                     //res.send(user.email);
                     //console.log(user);
                     let dataUserWithToken = {
+                        id: user._id,
                         user_type: user.user_type,
                         email: user.email,
                         employee: user.employee,
@@ -74,6 +75,7 @@ const AuthController = {
                         accessToken: accessToken
                     };
                     res.json(dataUserWithToken);
+                    //res.json(user);
                 } else{
                     //password wrong
                     res.status(409).send({message: 'password incorrect'});
