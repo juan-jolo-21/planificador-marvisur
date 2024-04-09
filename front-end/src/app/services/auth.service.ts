@@ -13,6 +13,7 @@ export class AuthService {
   private AUTH_SERVER: string = 'http://localhost:3000';
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
+  token = 'testing';
  
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') as string));
@@ -50,6 +51,10 @@ export class AuthService {
     localStorage.removeItem('accessToken');
     const user : any = null ;
     this.currentUserSubject.next(user);
+ }
+ 
+ public get isAuthenticaded(): boolean {
+  return this.token.length>0; 
  }
 
   // authsubject = new BehaviorSubject<boolean>(false);
