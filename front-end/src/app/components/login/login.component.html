@@ -1,0 +1,14 @@
+<div class="body-login">
+    <div class="login">
+        <!-- <div class="login-triangle"></div>
+         -->
+        <h2 class="login-header">Acceder</h2>
+      
+        <form (submit)="login()" class="login-container">
+          <p><input type="email" [(ngModel)]="username" name="username" placeholder="Email"></p>
+          <p><input type="password" [(ngModel)]="password" name="password" placeholder="Password"></p>
+          <p><input type="submit" value="Log in"></p>
+        </form>
+    </div>
+</div>
+
