@@ -13,7 +13,7 @@ export class AuthService {
   private AUTH_SERVER: string = 'http://localhost:3000';
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  token = 'testing';
+  token = 'aaaa';
  
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') as string));
@@ -29,19 +29,32 @@ export class AuthService {
     return this.http.post<JwtResponse>(`${this.AUTH_SERVER}/login`, { email, password })
       . pipe(map(jwtResponse => {
         // Almacenar el usuario y el token JWT en el almacenamiento local
-        if (jwtResponse && jwtResponse.dataUser) {
-          const user : User = {
+        let user :  any;
+        console.log('antes de validar');
+        console.log('jwtresponse only');
+        console.log(jwtResponse);
+        console.log('se procede a validar');
+        if (jwtResponse) {
+          user = {
             id: jwtResponse.dataUser.id,
             name: jwtResponse.dataUser.employee.person.name,
             email: jwtResponse.dataUser.email,
             password: password 
           };
-          console.log(user);
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          localStorage.setItem('accessToken', jwtResponse.dataUser.accessToken);
-          this.currentUserSubject.next(user);
+        }else{
+          user = {
+            id: 0,
+            name: 'not user yet'
+          }
         }
+        console.log('ttt');
+        console.log(user);
+        console.log('gggg');
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('accessToken', jwtResponse.dataUser.accessToken);
+        this.currentUserSubject.next(user);
         console.log(jwtResponse);
+        console.log(localStorage.getItem('currentUser'));
         return jwtResponse;
       }));
  }
@@ -53,7 +66,7 @@ export class AuthService {
     this.currentUserSubject.next(user);
  }
  
- public get isAuthenticaded(): boolean {
+ public isAuthenticaded(): boolean {
   return this.token.length>0; 
  }
 
