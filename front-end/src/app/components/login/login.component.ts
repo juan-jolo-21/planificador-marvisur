@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { JwtResponse } from '../../models/jwt-response';
+import { User } from '../../models/user';
 
 
 @Component({
@@ -19,10 +20,15 @@ export class LoginComponent {
   password: string = "";
  
   constructor(private authService: AuthService, private router: Router) { }
- 
+  
   login() {
+    let someUser: User = {
+      email : this.username,
+      password : this.password
+    };
+    
      this.authService
-     .login(this.username as string, this.password as string).subscribe(
+     .login(someUser).subscribe(
         {
           next : (data) => {
             this.router.navigate(['/dashboard']);

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { User } from '../models/user';
 import { JwtResponse } from '../models/jwt-response';
 
@@ -13,7 +13,7 @@ export class AuthService {
   private AUTH_SERVER: string = 'http://localhost:3000';
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  token = 'aaaa';
+  private token = '';
  
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') as string));
@@ -24,38 +24,42 @@ export class AuthService {
     return this.currentUserSubject.value;
  }
 
- login(email: string, password: string) {
+ login(someUser : User) {
     
-    return this.http.post<JwtResponse>(`${this.AUTH_SERVER}/login`, { email, password })
-      . pipe(map(jwtResponse => {
+    return this.http.post<JwtResponse>(`${this.AUTH_SERVER}/login`, someUser)
+      . pipe(tap(
+        (jwtResponse: JwtResponse) => {
         // Almacenar el usuario y el token JWT en el almacenamiento local
-        let user :  any;
-        console.log('antes de validar');
-        console.log('jwtresponse only');
-        console.log(jwtResponse);
-        console.log('se procede a validar');
+        let anotherUser, 
+        tokenAnotherUser, 
+        timestampAnotherUser :  any;
         if (jwtResponse) {
-          user = {
-            id: jwtResponse.dataUser.id,
-            name: jwtResponse.dataUser.employee.person.name,
-            email: jwtResponse.dataUser.email,
-            password: password 
-          };
-        }else{
-          user = {
-            id: 0,
-            name: 'not user yet'
+          anotherUser = {
+            id: jwtResponse.id,
+            user_type: jwtResponse.user_type,
+            email: jwtResponse.email,
+            employee: jwtResponse.employee
           }
+          tokenAnotherUser= jwtResponse.accessToken;
+          timestampAnotherUser= jwtResponse.expiresIn;
+        }else{
+          anotherUser = {
+            id: 0,
+            name: 'not user yet, please verify your credentials'
+          };
+          tokenAnotherUser = 'no token'; 
+          timestampAnotherUser = 0;
         }
-        console.log('ttt');
-        console.log(user);
-        console.log('gggg');
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        localStorage.setItem('accessToken', jwtResponse.dataUser.accessToken);
-        this.currentUserSubject.next(user);
-        console.log(jwtResponse);
+        this.token= tokenAnotherUser;
+        console.log(this.token);
+        localStorage.setItem('currentUser', JSON.stringify(anotherUser));
+        localStorage.setItem('token', tokenAnotherUser as string);
+        localStorage.setItem('timestamp', timestampAnotherUser);
+        //this.currentUserSubject.next(anotherUser);
         console.log(localStorage.getItem('currentUser'));
-        return jwtResponse;
+        console.log(localStorage.getItem('token'));
+        console.log(localStorage.getItem('timestamp'));
+        //return jwtResponse;
       }));
  }
 
@@ -83,7 +87,7 @@ export class AuthService {
   //         (res: JwtResponse) => {
   //           if (res) {
   //             // guardar token
-  //             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
+  //             this.saveToken(res.accessToken, res.expiresIn);
   //           }
   //         }
   //       ));
