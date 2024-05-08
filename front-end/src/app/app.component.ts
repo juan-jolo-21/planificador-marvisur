@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router'; 
 import { BrowserModule } from '@angular/platform-browser';
 // import { CommonModule } from '@angular/common';
 
@@ -13,4 +14,16 @@ import { BrowserModule } from '@angular/platform-browser';
 })
 export class AppComponent {
 //  title = 'Marvisur - 2';
+  constructor (private router : Router){}
+  ngOnInit(): void {
+    this.checkUserTypeAndRedirect();
+  }
+
+  private checkUserTypeAndRedirect(): void {
+    const userType = JSON.parse(localStorage.getItem('currentUser') as string).user_type;
+    if(userType) {
+      this.router.navigateByUrl(`/${userType}`);
+    }
+  }
+
 }

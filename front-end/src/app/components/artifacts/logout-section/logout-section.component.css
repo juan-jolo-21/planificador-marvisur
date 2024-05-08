@@ -1,0 +1,26 @@
+:host{
+    display: flex;
+}
+
+.logout{
+    background-color: #E30713;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction:row;
+    width: auto;
+    transition: .3s all;
+}
+
+.logout:hover{
+    background-color: #000000;
+}
+
+.logout>p{
+    margin: 0;
+    font-size: 12px;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+

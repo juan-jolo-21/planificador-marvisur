@@ -13,7 +13,9 @@ export class AuthService {
   private AUTH_SERVER: string = 'http://localhost:3000';
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  private token = '';
+  //token para mantener abierto la app
+  private token : string | null = localStorage.getItem('token') ;
+  // private token = '';
  
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') as string));
@@ -25,7 +27,8 @@ export class AuthService {
  }
 
  login(someUser : User) {
-    
+    console.log('prueba de inicio token');
+    // console.log(localStorage.getItem('token'));
     return this.http.post<JwtResponse>(`${this.AUTH_SERVER}/login`, someUser)
       . pipe(tap(
         (jwtResponse: JwtResponse) => {
@@ -51,28 +54,50 @@ export class AuthService {
           timestampAnotherUser = 0;
         }
         this.token= tokenAnotherUser;
-        console.log(this.token);
+        // console.log(this.token);
         localStorage.setItem('currentUser', JSON.stringify(anotherUser));
         localStorage.setItem('token', tokenAnotherUser as string);
         localStorage.setItem('timestamp', timestampAnotherUser);
-        //this.currentUserSubject.next(anotherUser);
-        console.log(localStorage.getItem('currentUser'));
-        console.log(localStorage.getItem('token'));
-        console.log(localStorage.getItem('timestamp'));
-        //return jwtResponse;
+
       }));
  }
 
  logout() {
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('token');
+    localStorage.removeItem('timestamp');
     const user : any = null ;
-    this.currentUserSubject.next(user);
+    //this.currentUserSubject.next(user);
  }
  
  public isAuthenticaded(): boolean {
-  return this.token.length>0; 
+  if (this.token != null)
+    return this.token.length>0;
+  else
+    return false;
  }
+
+
+public userTypeLoggining (userType: string) : boolean {
+
+  return userType === JSON.parse(localStorage.getItem('currentUser') as string).user_type;
+
+}
+
+
+
+//  public userTypeLoggining(userType: string) : boolean{
+//   switch(userType){
+//     case "admin":
+//     case "register":
+//     case "manloader":
+//       return true;
+//       break;
+//     default:
+//       return false;
+//       break;
+//   }
+//  }
 
   // authsubject = new BehaviorSubject<boolean>(false);
   // private token: string | undefined | null ;
@@ -80,24 +105,8 @@ export class AuthService {
   // constructor(private httpClient: HttpClient) { }
 
 
-  // login(user: User): Observable<JwtResponse> {
-  //   return this.httpClient.post<JwtResponse>
-  //     (`${this.AUTH_SERVER}/login`,user)
-  //       .pipe(tap(
-  //         (res: JwtResponse) => {
-  //           if (res) {
-  //             // guardar token
-  //             this.saveToken(res.accessToken, res.expiresIn);
-  //           }
-  //         }
-  //       ));
-  // }
 
-  // logout(): void {
-  //   this.token = '';
-  //   localStorage.removeItem("ACCESS_TOKEN");
-  //   localStorage.removeItem("EXPIRES_IN");
-  // }
+
 
   // private saveToken(token: string, expiresIn: string): void {
   //   localStorage.setItem("ACCESS_TOKEN", token);

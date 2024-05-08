@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { LogoutSectionComponent } from '../../../artifacts/logout-section/logout-section.component';
 
 @Component({
-  selector: 'app-admin-dashboard',
+  selector: 'app-register-dashboard',
   standalone: true,
   imports: [LogoutSectionComponent],
-  templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.css'
+  templateUrl: './register-dashboard.component.html',
+  styleUrl: './register-dashboard.component.css'
 })
-export class AdminDashboardComponent {
+export class RegisterDashboardComponent {
 
 }

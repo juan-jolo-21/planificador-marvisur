@@ -20,6 +20,15 @@
 
 /* 'Open Sans' font from Google Fonts */
 
+:host{
+
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  height: 100vh;
+  background: #F8F0CB;
+}
 
 .login {
   width: 400px;

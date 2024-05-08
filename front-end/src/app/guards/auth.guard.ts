@@ -5,9 +5,8 @@ import { AuthService } from '../services/auth.service';
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  console.log("a");
-  console.log(authService.isAuthenticaded());
-  if (authService.isAuthenticaded()) {
+  
+  if (authService.isAuthenticaded() && authService.userTypeLoggining(state.url.slice(1))) {
     return true;
   } else {
     const url = router.createUrlTree(['/']);
@@ -19,3 +18,7 @@ export const authGuardMatch: CanMatchFn = (route, segments) => {
   const authService = inject(AuthService);
   return authService.isAuthenticaded();
 }
+
+
+
+
