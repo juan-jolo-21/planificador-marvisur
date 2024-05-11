@@ -1,0 +1,60 @@
+p {
+  margin: 0;
+}
+
+.offcanvas-header {
+  align-items: start;
+}
+
+.data-profile-user {
+  display: flex;
+  flex-direction: row;
+  gap: 0px 12px;
+}
+
+.name-from-user {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.data-profile-user > img {
+  width: 100px;
+  border-radius: 50%;
+}
+
+.offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.logout-on-sidenav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.data-from-user {
+  
+  
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 32px 0px;
+}
+
+
+.data-from-user>div>div{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap:6px 0px;
+}
+
+
+

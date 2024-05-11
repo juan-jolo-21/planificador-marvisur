@@ -14,11 +14,13 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   //token para mantener abierto la app
+  private currentUserJSONData : any; 
   private token : string | null = localStorage.getItem('token') ;
   // private token = '';
  
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') as string));
+    this.currentUserJSONData = JSON.parse(localStorage.getItem('currentUser') as string);
+    this.currentUserSubject = new BehaviorSubject<User>(this.currentUserJSONData);
     this.currentUser = this.currentUserSubject.asObservable();
  }
 
@@ -78,12 +80,28 @@ export class AuthService {
  }
 
 
-public userTypeLoggining (userType: string) : boolean {
-
-  return userType === JSON.parse(localStorage.getItem('currentUser') as string).user_type;
-
+public getCurrentUserJSONData() : string {
+  return this.currentUserJSONData;
 }
 
+public getUserType(): string {
+  return this.currentUserJSONData.user_type;
+}
+
+public getUserNameData():any {
+  return this.currentUserJSONData.employee.person;
+}
+
+public getCompleteName() : string {
+  return `${this.getUserNameData().last_name_1} ${this.getUserNameData().last_name_2}, ${this.getUserNameData().name}`;
+}
+
+
+public userTypeLoggining (userType: string) : boolean {
+
+  return userType === this.getUserType();
+
+}
 
 
 //  public userTypeLoggining(userType: string) : boolean{

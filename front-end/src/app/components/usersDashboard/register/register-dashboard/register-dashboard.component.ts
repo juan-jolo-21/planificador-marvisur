@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { LogoutSectionComponent } from '../../../artifacts/logout-section/logout-section.component';
+import { NavbarComponent } from '../../../artifacts/navbar/navbar.component';
 
 @Component({
   selector: 'app-register-dashboard',
   standalone: true,
-  imports: [LogoutSectionComponent],
+  imports: [NavbarComponent],
   templateUrl: './register-dashboard.component.html',
   styleUrl: './register-dashboard.component.css'
 })

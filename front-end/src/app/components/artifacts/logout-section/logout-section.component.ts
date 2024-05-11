@@ -12,7 +12,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LogoutSectionComponent {
   constructor(private authService: AuthService, private router: Router) {}
   logout(){
-    console.log('aea');
     this.authService.logout();
 
     this.router.navigate(['']);

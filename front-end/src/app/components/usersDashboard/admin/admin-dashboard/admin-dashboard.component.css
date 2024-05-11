@@ -1,0 +1,9 @@
+#second-navbar-admin{
+    display: flex;
+    flex-direction: row;
+    gap: 0 16px;
+}
+
+#second-navbar-admin>span{
+    align-content: center;
+}

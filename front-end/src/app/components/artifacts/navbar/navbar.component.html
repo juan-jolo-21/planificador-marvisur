@@ -1,0 +1,89 @@
+<nav class="navbar bg-danger border-bottom border-body sticky-top px-4 py-3 " data-bs-theme="ligth">
+    <div class="nb-toleft">
+        <p class="text-white">
+            Bienvenido {{ getTypeUser() | titlecase }}: {{ getCompleteName() }}
+        </p>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark bg-warning" tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <!-- <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+                Dark offcanvas
+            </h5> -->
+
+            <div class="data-profile-user">
+                <img src = "assets/blank-profile-picture.png" alt = "profile picture">
+                <div class="name-from-user text-dark">
+                    <p>{{getUserNameData().name}}</p>
+                    <p>{{getUserNameData().last_name_1}}</p>
+                    <p>{{getUserNameData().last_name_2}}</p>
+                </div>
+            </div>
+            
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item">Action</a></li>
+                        <li><a class="dropdown-item">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul> -->
+
+
+            <div class="data-from-user text-dark">
+                <div>
+                    <p >Datos basicos de usuario</p>
+                    <div class="bg-warning-subtle bg-opacity-25 border border-black rounded border-2 p-2 user-basic-information">
+                        <p>Correo: {{getCurrentUserJSONData().email }}</p>
+                        <p>DNI: {{getCurrentUserJSONData().employee.person.dni}}</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <p >Datos de Sucursal</p>
+                    <div class="bg-warning-subtle bg-opacity-25 border border-black rounded border-2 p-2 branch-information">
+                        <p>Sucursal: {{getCurrentUserJSONData().employee.name_branch | titlecase}}</p>
+                        <p>Posicion: {{getCurrentUserJSONData().employee.position | titlecase}}</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <button type="button" class="btn btn-success">Solicitar cambio de datos</button>
+                </div>
+                
+
+
+            </div>
+
+
+
+
+
+            <div class="py-4 logout-on-sidenav">
+                <app-logout-section></app-logout-section>
+            </div>
+        </div>
+    </div>
+</nav>
