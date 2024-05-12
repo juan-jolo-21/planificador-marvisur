@@ -1,2 +1,14 @@
-<app-navbar></app-navbar>
-<p>register-dashboard works!</p>
+
+
+<div class="p-4">
+    <ul>
+        @for(option of optionList; track option; let i = $index){
+            <li class="pb-4">
+                <a [href]="option.directTo" style="text-decoration: none;">
+                    <selector-for-options-advailable [title]="option.title"></selector-for-options-advailable>
+                </a>
+                
+            </li>
+        }
+    </ul>
+</div>

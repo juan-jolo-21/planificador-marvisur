@@ -5,6 +5,8 @@ import { AdminDashboardComponent } from './components/usersDashboard/admin/admin
 import { authGuard, authGuardMatch } from './guards/auth.guard';
 import { ManloaderDashboardComponent } from './components/usersDashboard/manloader/manloader-dashboard/manloader-dashboard.component';
 import { RegisterDashboardComponent } from './components/usersDashboard/register/register-dashboard/register-dashboard.component';
+import { OnlyAdminComponent } from './components/usersDashboard/admin/only-admin/only-admin.component';
+import { UserLayoutComponent } from './components/usersDashboard/user-layout/user-layout.component';
 
 //angular 17 al implementar componentes independientes (standalone)
 export const routes: Routes = [
@@ -13,20 +15,28 @@ export const routes: Routes = [
         component:LoginComponent
     },
     {
-        path: 'admin',
-        component:AdminDashboardComponent,
-        canActivate :[authGuard]
+        path: '',
+        component: UserLayoutComponent,
+        canActivate :[authGuard],
+        children: [
+            {
+                path: 'admin',
+                component:AdminDashboardComponent,
+                
+            },
+            {
+                path: 'manloader',
+                component:ManloaderDashboardComponent,
+
+            },
+            {
+                path: 'register',
+                component:RegisterDashboardComponent,
+
+            }
+        ]
     },
-    {
-        path: 'manloader',
-        component:ManloaderDashboardComponent,
-        canActivate :[authGuard]
-    },
-    {
-        path: 'register',
-        component:RegisterDashboardComponent,
-        canActivate :[authGuard]
-    },
+    
     {
         path: '**',
         component: NotFoundComponent

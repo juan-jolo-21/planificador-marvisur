@@ -1,0 +1,8 @@
+div{
+    transition: .3s all;
+}
+
+div:hover{
+    color: var(--bs-warning) !important;
+    background-color: var(--bs-warning-bg-subtle)!important;
+}

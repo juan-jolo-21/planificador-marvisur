@@ -1,9 +1,23 @@
-#second-navbar-admin{
-    display: flex;
-    flex-direction: row;
-    gap: 0 16px;
+.mat-tab-group {
+    margin-bottom: 48px;
+  }
+
+.header-tabs{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0 18px;
 }
 
-#second-navbar-admin>span{
-    align-content: center;
+.header-tabs>span{
+  align-content: center;
 }
+
+.nav-link{
+  color: #212529;
+}
+
+.nav-link.active{
+  background-color: #dc3545;
+}
+
