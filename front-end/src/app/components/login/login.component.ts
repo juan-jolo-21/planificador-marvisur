@@ -28,19 +28,19 @@ export class LoginComponent {
 
     this.authService.login(someUser).subscribe({
       next: (data) => {
-        console.log('antes de derivar');
+        let urlTree : any ;
         switch(data.user_type){
           case "admin":
-            this.router.navigate(['/admin']);
+            urlTree = this.router.createUrlTree(['/admin']);
             break;
           case "register":
-            this.router.navigate(['/register']);
+            urlTree = this.router.createUrlTree(['/register']);
             break;
           case "manloader":
-            this.router.navigate(['/manloader']);
+            urlTree = this.router.createUrlTree(['/manloader']);
             break;
         }
-        
+        this.router.navigateByUrl(urlTree);
       },
       error: (e) => {
         console.log(e);

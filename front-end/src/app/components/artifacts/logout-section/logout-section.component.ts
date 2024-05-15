@@ -14,6 +14,7 @@ export class LogoutSectionComponent {
   logout(){
     this.authService.logout();
 
-    this.router.navigate(['']);
+    const urlTree = this.router.createUrlTree(['']);
+    this.router.navigateByUrl(urlTree);
   }
 }

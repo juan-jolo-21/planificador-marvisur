@@ -1,0 +1,267 @@
+<wizard-bar [title]="title"></wizard-bar>
+
+<div>
+    <mat-stepper orientation="vertical" linear="true" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Ingrese los datos del Emisor (cliente)</ng-template>
+                <p>
+                    <mat-form-field class="full-width-field">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput placeholder="Nombres completos" formControlName="NombreEmisor" required />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width-field">
+                        <mat-label>Apellido Paterno</mat-label>
+                        <input matInput formControlName="APEmisor" required />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width-field">
+                        <mat-label>Apellido Materno</mat-label>
+                        <input matInput formControlName="AMEmisor" required />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width-field">
+                        <mat-label>DNI</mat-label>
+                        <input matInput type="number" min="00010000" max="99999999" inputmode="numeric" pattern="[0-9]*"
+                            maxlength="8" formControlName="DniEmisor" required />
+                    </mat-form-field>
+                </p>
+
+                <div>
+                    <button mat-flat-button color="primary"
+                        (click)="mostrarValorEtapaForm(firstFormGroup)" matStepperNext>
+                        Siguiente
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Ingrese los datos del Receptor</ng-template>
+
+                <p>
+                    <mat-form-field class="full-width-field">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput placeholder="Nombres completos" formControlName="NombreReceptor" required />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width-field">
+                        <mat-label>Apellido Paterno</mat-label>
+                        <input matInput formControlName="APReceptor" required />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width-field">
+                        <mat-label>Apellido Materno</mat-label>
+                        <input matInput formControlName="AMReceptor" required />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width-field">
+                        <mat-label>DNI</mat-label>
+                        <input matInput type="number" min="00010000" max="99999999" pattern="[0-9]*" maxlength="8"
+                            formControlName="DniReceptor" required />
+                    </mat-form-field>
+                </p>
+
+                <div class="d-flex flex-row column-gap-3">
+                    <button mat-stroked-button color="primary" 
+                                
+                            matStepperPrevious>
+                        Atrás
+                    </button>
+                    <button mat-flat-button 
+                            (click)="mostrarValorEtapaForm(secondFormGroup)"        
+                            color="primary" matStepperNext>
+                        Siguiente
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="thirdFormGroup">
+            <form [formGroup]="thirdFormGroup">
+                <ng-template matStepLabel>Seleccionar destino</ng-template>
+                <p>
+                    <mat-form-field class="half-width-field">
+                        <mat-label>Lugar de destino</mat-label>
+                        <input type="text" 
+                            placeholder="Seleccione el lugar de destino" 
+                            matInput
+                            [matAutocomplete]="autoLugarDestino" 
+                            formControlName="LugarDestino" 
+                            required>
+                        <mat-autocomplete #autoLugarDestino="matAutocomplete">
+                            @for (option of filteredOptionsLugarDestino | async; track option) {
+                            <mat-option [value]="option">{{option}}</mat-option>
+                            }
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </p>
+
+
+
+                <div class="d-flex flex-row column-gap-3">
+                    <button mat-stroked-button color="primary" matStepperPrevious>
+                        Atrás
+                    </button>
+                    <button mat-flat-button color="primary" 
+                            (click)="mostrarValorEtapaForm(thirdFormGroup)"        
+                            matStepperNext>
+                        Siguiente
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="fourthFormGroup">
+            <form [formGroup]="fourthFormGroup">
+                <ng-template matStepLabel>Seleccionar Sucursal</ng-template>
+                
+                <p>
+                    <mat-form-field class="half-width-field">
+                        <mat-label>Sucursal</mat-label>
+                        <input type="text" 
+                            placeholder="Seleccione la Sucursal" 
+                            matInput 
+                            [matAutocomplete]="autoSucursal" 
+                            formControlName="Sucursal" 
+                            required>
+                        <mat-autocomplete #autoSucursal="matAutocomplete">
+                            @for (option of filteredOptionsSucursal | async; track option) {
+                            <mat-option [value]="option">{{option}}</mat-option>
+                            }
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </p>
+
+
+                <div class="d-flex flex-row column-gap-3">
+                    <button mat-stroked-button color="primary" matStepperPrevious>
+                        Atrás
+                    </button>
+                    <button mat-flat-button 
+                            (click)="mostrarValorEtapaForm(fourthFormGroup)"
+                            color="primary" matStepperNext>
+                        Siguiente
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="fifthFormGroup">
+            <form [formGroup]="fifthFormGroup">
+                <ng-template matStepLabel>Ingrese datos del paquete</ng-template>
+                <p>Dimensiones del paquete (en cm)</p>
+                <div class="dimensions-package d-flex flex-row column-gap-5">
+                    <p>
+                        <mat-form-field class="em10-width-field">
+                            <mat-label>Largo</mat-label>
+                            <input matInput type="number" placeholder="Largo (x)" maxlength="3"
+                                formControlName="dimension_x" required />
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="em10-width-field">
+                            <mat-label>Ancho</mat-label>
+                            <input matInput type="number" placeholder="Ancho (y)" maxlength="3"
+                                formControlName="dimension_y" required />
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="em10-width-field">
+                            <mat-label>Alto</mat-label>
+                            <input matInput type="number" placeholder="Alto (z)" maxlength="3"
+                                formControlName="dimension_z" required />
+                        </mat-form-field>
+                    </p>
+                </div>
+                <p> Datos complementarios</p>
+                <div class="more-information-package">
+                    <p>
+                        <mat-form-field class="em10-width-field">
+                            <mat-label>Peso</mat-label>
+                            <input matInput type="number" placeholder="Peso (en Kg)" maxlength="3"
+                                formControlName="peso" required />
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="full-width-field">
+                            <mat-label>Prioridad</mat-label>
+                            <mat-select formControlName="prioridad" required>
+                                <mat-option value="Normal">Normal</mat-option>
+                                <mat-option value="Urgente">Urgente</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="full-width-field">
+                            <mat-label>Tipo de encomienda</mat-label>
+                            <mat-select formControlName="tipo_encomienda" required>
+                                <mat-option value="Normal">Ordinaria</mat-option>
+                                <mat-option value="Urgente">Vehiculo Menor</mat-option>
+                                <mat-option value="Urgente">Objetos de valor</mat-option>
+                                <mat-option value="Urgente">Petición de cliente</mat-option>
+                                <mat-option value="Urgente">Cuidados especiales</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </p>
+                </div>
+
+
+                <div class="d-flex flex-row column-gap-3">
+                    <button mat-stroked-button color="primary" matStepperPrevious>
+                        Atrás
+                    </button>
+                    <button mat-flat-button 
+                            (click)="mostrarValorEtapaForm(fifthFormGroup)"
+                            color="primary" 
+                            matStepperNext>
+                        Siguiente
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="sixthFormGroup">
+            <form [formGroup]="sixthFormGroup">
+                <ng-template matStepLabel>Precio calculado del paquete</ng-template>
+
+                
+
+                <div class="d-flex flex-row column-gap-3">
+                    <p class="fs-5 d-flex flex-wrap align-content-center">
+                        El precio calculado final es:
+                    </p>
+                    <p>
+                        <mat-form-field class="em10-width-field">
+                            <!-- <mat-label>Precio final </mat-label> -->
+                            <input matInput 
+                            formControlName="precioCalculado"
+                            type="number"  class="text-dark"                      
+                            />
+                            <span matTextPrefix>S/.&nbsp;</span>
+                        </mat-form-field>
+                    </p>
+                </div>
+
+                <div class="d-flex flex-row column-gap-3">
+                    <button mat-stroked-button color="primary" matStepperPrevious>
+                        Atrás
+                    </button>
+                    <button mat-flat-button 
+                            (click)="mostrarValorEtapaForm(sixthFormGroup)"
+                            class="bg-success text-white">Finalizar</button>
+                    <button mat-flat-button color="warn" (click)="stepper.reset()">
+                        Reset
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-stepper>
+</div>

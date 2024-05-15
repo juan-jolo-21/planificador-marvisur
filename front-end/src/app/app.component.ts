@@ -21,9 +21,12 @@ export class AppComponent {
 
   private checkUserTypeAndRedirect(): void {
     const userType = JSON.parse(localStorage.getItem('currentUser') as string).user_type;
+    //console.log(window.location);
     if(userType) {
-      this.router.createUrlTree([`/${userType}`]);
+      const urlTree = this.router.createUrlTree([`/${userType}`]);
+      this.router.navigateByUrl(urlTree);
     }
+    
   }
 
 }

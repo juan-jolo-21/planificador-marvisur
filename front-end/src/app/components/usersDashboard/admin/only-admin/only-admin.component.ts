@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { OptionsAdvailableComponent } from '../../../artifacts/options-advailable/options-advailable.component';
 import { OptionButtom } from '../../../../models/option-buttom';
+import { ListOptionsAdvailableComponent } from '../../../artifacts/list-options-advailable/list-options-advailable.component';
 @Component({
   selector: 'app-only-admin',
   standalone: true,
-  imports: [OptionsAdvailableComponent],
+  imports: [OptionsAdvailableComponent, ListOptionsAdvailableComponent],
   templateUrl: './only-admin.component.html',
   styleUrl: './only-admin.component.css'
 })

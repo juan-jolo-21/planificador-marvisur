@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { OptionsAdvailableComponent } from '../../../artifacts/options-advailable/options-advailable.component';
 import { OptionButtom } from '../../../../models/option-buttom';
+import { RouterLinkWithHref } from '@angular/router';
+import { ListOptionsAdvailableComponent } from '../../../artifacts/list-options-advailable/list-options-advailable.component';
 
 @Component({
   selector: 'app-register-dashboard',
   standalone: true,
-  imports: [OptionsAdvailableComponent],
+  imports: [OptionsAdvailableComponent, ListOptionsAdvailableComponent,RouterLinkWithHref],
   templateUrl: './register-dashboard.component.html',
   styleUrl: './register-dashboard.component.css'
 })
@@ -13,15 +17,15 @@ export class RegisterDashboardComponent {
   optionList: OptionButtom[] = [
     {
       title: 'Registrar paquetes de emisor',
-      directTo: 'testForRegister'
+      directTo: 'RegistrarPaqueteEmisor'
     },
     {
       title: 'Buscar paquete y entregar a receptor',
-      directTo: 'testForRegister'
+      directTo: 'BuscarEntregarPaquete'
     },
     {
       title: 'Buscar paquete únicamente',
-      directTo: 'testForRegister'
+      directTo: 'SoloBuscarPaquete'
     }
   ]
 }

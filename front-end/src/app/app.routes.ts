@@ -7,6 +7,9 @@ import { ManloaderDashboardComponent } from './components/usersDashboard/manload
 import { RegisterDashboardComponent } from './components/usersDashboard/register/register-dashboard/register-dashboard.component';
 import { OnlyAdminComponent } from './components/usersDashboard/admin/only-admin/only-admin.component';
 import { UserLayoutComponent } from './components/usersDashboard/user-layout/user-layout.component';
+import { RegPaquetesEmisorComponent } from './components/usersDashboard/register/reg-paquetes-emisor/reg-paquetes-emisor.component';
+import { BuscarPaqEntregarReceptorComponent } from './components/usersDashboard/register/buscar-paq-entregar-receptor/buscar-paq-entregar-receptor.component';
+import { BuscarPaqSoloComponent } from './components/usersDashboard/register/buscar-paq-solo/buscar-paq-solo.component';
 
 //angular 17 al implementar componentes independientes (standalone)
 export const routes: Routes = [
@@ -17,7 +20,7 @@ export const routes: Routes = [
     {
         path: '',
         component: UserLayoutComponent,
-        canActivate :[authGuard],
+        // canActivate :[authGuard],
         children: [
             {
                 path: 'admin',
@@ -32,11 +35,25 @@ export const routes: Routes = [
             {
                 path: 'register',
                 component:RegisterDashboardComponent,
+                children:[
+                    
+                ]
 
             }
         ]
     },
-    
+    {
+        path:'register/RegistrarPaqueteEmisor',
+        component: RegPaquetesEmisorComponent
+    },
+    {
+        path:'register/BuscarEntregarPaquete',
+        component: BuscarPaqEntregarReceptorComponent
+    },
+    {
+        path:'register/SoloBuscarPaquete',
+        component: BuscarPaqSoloComponent
+    },
     {
         path: '**',
         component: NotFoundComponent

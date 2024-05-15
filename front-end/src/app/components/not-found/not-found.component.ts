@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './not-found.component.css'
 })
 export class NotFoundComponent {
-
+  ngOnInit() :void{
+    console.log(window.location);
+  }
 }
