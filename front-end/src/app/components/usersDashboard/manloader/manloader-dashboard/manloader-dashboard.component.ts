@@ -15,26 +15,26 @@ export class ManloaderDashboardComponent {
   optionList: OptionButtom[] = [
     {
       title: 'Descargar contenedor',
-      directTo: 'testForManloader'
+      directTo: 'DescargarContenedor'
     },
     {
       title: 'Ver paquetes por sede sin entregar',
-      directTo: 'testForManloader'
+      directTo: 'VerPaquetesPorSedeSinEntregar'
     },
     {
       title: 'Ver paquetes recibidos',
-      directTo: 'testForManloader'
+      directTo: 'VerPaquetesRecibidos'
     },
     {
       title: 'Asignar paquetes a contenedor',
-      directTo: 'testForManloader'
+      directTo: 'AsignarPaquetesContenedor'
     },
     {
       title: 'Marcar llegada de contenedor',
-      directTo: 'testForManloader'
+      directTo: 'MarcarLlegadaContenedor'
     },{
       title: 'Marcar partida de contenedor',
-      directTo: 'testForManloader'
+      directTo: 'MarcarPartidaContenedor'
     }
   ]
 }

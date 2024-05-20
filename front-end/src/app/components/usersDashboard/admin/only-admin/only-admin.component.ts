@@ -13,19 +13,19 @@ export class OnlyAdminComponent {
   optionList: OptionButtom[] = [
     {
       title: 'Administrar Usuarios',
-      directTo: 'testForAdmin'
+      directTo: 'AdministrarUsuario'
     },
     {
       title: 'Administrar Camiones',
-      directTo: 'testForAdmin'
+      directTo: 'AdministrarCamiones'
     },
     {
       title: 'Administrar Sucursales',
-      directTo: 'testForAdmin'
+      directTo: 'AdministrarSucursales'
     },
     {
       title: 'Administrar Contenedores',
-      directTo: 'testForAdmin'
+      directTo: 'AdministrarContenedores'
     }
   ]
 }

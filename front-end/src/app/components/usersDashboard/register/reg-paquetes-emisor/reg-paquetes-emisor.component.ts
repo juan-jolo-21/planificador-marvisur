@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { WizardBarComponent } from '../../../artifacts/wizard-bar/wizard-bar.component';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
+
 
 import {
   FormControl,
@@ -20,6 +20,7 @@ import { AsyncPipe } from '@angular/common';
 
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { WizardBarComponent } from '../../../artifacts/wizard-bar/wizard-bar.component';
 
 @Component({
   selector: 'app-reg-paquetes-emisor',
@@ -41,7 +42,12 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class RegPaquetesEmisorComponent {
   
-  title = 'Registrar paquetes del emisor';
+  title = 'Registar paquetes de emisor';
+
+  
+  @Output() SendTitle = new EventEmitter();
+
+  
   pricePackage = 25;
 
   AutoCompleteControlLugarDestino = new FormControl('');
@@ -94,6 +100,9 @@ export class RegPaquetesEmisorComponent {
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
+
+    this.SendTitle.emit(this.title);
+
     this.filteredOptionsSucursal = this.AutoCompleteControlSucursal.valueChanges.pipe(
       startWith(''),
       map((value) => this.filterSucursal(value || ''))

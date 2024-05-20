@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+
 import { OptionsAdvailableComponent } from '../../../artifacts/options-advailable/options-advailable.component';
 import { OptionButtom } from '../../../../models/option-buttom';
 import { RouterLinkWithHref } from '@angular/router';
@@ -9,7 +9,7 @@ import { ListOptionsAdvailableComponent } from '../../../artifacts/list-options-
 @Component({
   selector: 'app-register-dashboard',
   standalone: true,
-  imports: [OptionsAdvailableComponent, ListOptionsAdvailableComponent,RouterLinkWithHref],
+  imports: [OptionsAdvailableComponent, ListOptionsAdvailableComponent,RouterLinkWithHref ],
   templateUrl: './register-dashboard.component.html',
   styleUrl: './register-dashboard.component.css'
 })

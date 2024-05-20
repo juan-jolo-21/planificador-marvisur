@@ -1,15 +1,17 @@
 import { Routes } from '@angular/router';
+
+import { authGuard, authGuardMatch } from './guards/auth.guard';
+
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AdminDashboardComponent } from './components/usersDashboard/admin/admin-dashboard/admin-dashboard.component';
-import { authGuard, authGuardMatch } from './guards/auth.guard';
 import { ManloaderDashboardComponent } from './components/usersDashboard/manloader/manloader-dashboard/manloader-dashboard.component';
 import { RegisterDashboardComponent } from './components/usersDashboard/register/register-dashboard/register-dashboard.component';
 import { OnlyAdminComponent } from './components/usersDashboard/admin/only-admin/only-admin.component';
 import { UserLayoutComponent } from './components/usersDashboard/user-layout/user-layout.component';
-import { RegPaquetesEmisorComponent } from './components/usersDashboard/register/reg-paquetes-emisor/reg-paquetes-emisor.component';
-import { BuscarPaqEntregarReceptorComponent } from './components/usersDashboard/register/buscar-paq-entregar-receptor/buscar-paq-entregar-receptor.component';
-import { BuscarPaqSoloComponent } from './components/usersDashboard/register/buscar-paq-solo/buscar-paq-solo.component';
+import { RegisterLayoutOptionsComponent } from './components/usersDashboard/register/register-layout-options/register-layout-options.component';
+import { AdminLayoutOptionsComponent } from './components/usersDashboard/admin/admin-layout-options/admin-layout-options.component';
+import { ManloaderLayoutOptionsComponent } from './components/usersDashboard/manloader/manloader-layout-options/manloader-layout-options.component';
 
 //angular 17 al implementar componentes independientes (standalone)
 export const routes: Routes = [
@@ -20,7 +22,7 @@ export const routes: Routes = [
     {
         path: '',
         component: UserLayoutComponent,
-        // canActivate :[authGuard],
+        canActivate :[authGuard],
         children: [
             {
                 path: 'admin',
@@ -35,24 +37,24 @@ export const routes: Routes = [
             {
                 path: 'register',
                 component:RegisterDashboardComponent,
-                children:[
-                    
-                ]
-
+                
             }
         ]
     },
     {
-        path:'register/RegistrarPaqueteEmisor',
-        component: RegPaquetesEmisorComponent
+        path: 'register',
+        component: RegisterLayoutOptionsComponent,
+        loadChildren: () => import ('./components/usersDashboard/register/register.routes').then(m=>m.Register_routes)
     },
     {
-        path:'register/BuscarEntregarPaquete',
-        component: BuscarPaqEntregarReceptorComponent
+        path: 'admin',
+        component: AdminLayoutOptionsComponent,
+        loadChildren: () => import ('./components/usersDashboard/admin/admin.routes').then(m=>m.Admin_routes)
     },
     {
-        path:'register/SoloBuscarPaquete',
-        component: BuscarPaqSoloComponent
+        path: 'manloader',
+        component: ManloaderLayoutOptionsComponent,
+        loadChildren: () => import ('./components/usersDashboard/manloader/manloader.routes').then(m=>m.Manloader_routes)
     },
     {
         path: '**',
