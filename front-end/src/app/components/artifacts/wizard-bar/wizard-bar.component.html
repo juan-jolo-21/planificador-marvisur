@@ -1,12 +1,26 @@
-<div class="bg-danger border-bottom border-body sticky-top px-4 py-3  d-flex flex-row column-gap-3" data-bs-theme="ligth" >
-    <a routerLink=".." class="text-decoration-none text-white">
-        <div class = "fs-3 d-flex bg-warning p-1 justify-content-center align-items-center" style="width: 2em; height:2em; border-radius: 50%;">
-            <i class="fa-solid fa-chevron-left"></i>
-        </div>
-    </a>
+<div class="bg-danger border-bottom border-body sticky-top px-4 py-3 d-flex flex-row justify-content-between" data-bs-theme="ligth" >
     
-    <p class="text-white m-0 d-flex align-items-center fs-4">
-        {{title}}
-    </p>
-    
+    <div class="d-flex flex-row column-gap-3">
+        <a routerLink=".." class="text-decoration-none text-white d-flex flex-row align-items-center">
+            <div class = "fs-3 d-flex bg-warning p-1 justify-content-center align-items-center" style="width: 2em; height:2em; border-radius: 50%;">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+        </a>
+        
+        <p class="text-white m-0 d-flex align-items-center fs-4">
+            {{title}}
+        </p>
+    </div>
+    <div class = "text-white text-end">
+        <p>
+            Sede: {{getCurrentUserJSONData().employee.name_branch | titlecase}}
+        </p>
+        <p>
+            Usuario: {{getCompleteName()}}
+        </p>
+        <p>
+            Día: {{today |date:'longDate' }}
+        </p>
+    </div>
+
 </div>

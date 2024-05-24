@@ -1,0 +1,30 @@
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+.full-width-field{
+    width: 100%;
+}
+
+.em10-width-field{
+    width: 10em;
+}
+
+
+.half-width-field{
+  width: 50%;
+}
+
+.mat-stepper-vertical {
+    margin-top: 8px;
+  }
+  
+  .mat-mdc-form-field {
+    margin-top: 16px;
+  }
+
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }

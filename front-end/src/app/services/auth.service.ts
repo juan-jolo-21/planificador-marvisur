@@ -80,7 +80,7 @@ export class AuthService {
  }
 
 
-public getCurrentUserJSONData() : string {
+public getCurrentUserJSONData() : any {
   return this.currentUserJSONData;
 }
 

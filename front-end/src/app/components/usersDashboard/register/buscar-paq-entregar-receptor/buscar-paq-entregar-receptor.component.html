@@ -1,2 +1,109 @@
 <wizard-bar [title]="title"></wizard-bar>
-<p>buscar-paq-entregar-receptor works!</p>
+
+
+
+<div>
+    <mat-stepper orientation="vertical" linear="false" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Ingrese DNI del receptor</ng-template>
+                <p>
+                    <mat-form-field class="full-width-field ">
+                        <mat-label>DNI</mat-label>
+                        <input matInput placeholder="Nombres completos" 
+                            formControlName="DNIReceptor" 
+                            type="number" maxlength="8"
+                            required />
+                    </mat-form-field>
+                </p>
+
+                <div>
+                    <button mat-flat-button color="primary"
+                        (click)="mostrarValorEtapaForm(firstFormGroup)" matStepperNext>
+                        Siguiente
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+
+
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Ver datos de paquete a entregar</ng-template>
+                <p class="pt-2">Nombres y Apellidos del cliente</p>
+                <p>
+                    <mat-form-field class="full-width-field disabled-but-information">
+                        <mat-label>Nombre del cliente (emisor)</mat-label>
+                        <input matInput placeholder="Nombres completos" 
+                        formControlName="NombreEmisorCompleto"  />
+                    </mat-form-field>
+                </p>
+                
+                <p>Dimensiones del paquete (en cm)</p>
+                <div class="dimensions-package d-flex flex-row column-gap-5">
+                    <p>
+                        <mat-form-field class="em10-width-field disabled-but-information">
+                            <mat-label>Largo</mat-label>
+                            <input matInput type="number" 
+                                maxlength="3"
+                                formControlName="dimension_x"  />
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="em10-width-field disabled-but-information">
+                            <mat-label>Ancho</mat-label>
+                            <input matInput type="number" 
+                             maxlength="3"
+                                formControlName="dimension_y"  />
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="em10-width-field disabled-but-information">
+                            <mat-label>Alto</mat-label>
+                            <input matInput type="number" 
+                            maxlength="3"
+                                formControlName="dimension_z"  />
+                        </mat-form-field>
+                    </p>
+                </div>
+
+                <p>Detalles del paquete </p>
+                <div class="details-package d-flex flex-row flex-nowrap column-gap-5 full-width-field">
+                    <p>
+                        <mat-form-field class="em10-width-field disabled-but-information">
+                            <mat-label>Peso</mat-label>
+                            <input matInput type="number" maxlength="3"
+                                formControlName="peso" />
+                        </mat-form-field>
+                    </p>
+                    <p class="full-width-field">
+                        <mat-form-field class="full-width-field disabled-but-information">
+                            <mat-label>Detalles:</mat-label>
+                            <textarea matInput 
+                            formControlName="acercaDelPaquete" 
+                            class="full-width-field">
+                            </textarea>
+                          </mat-form-field>
+                    </p>
+                    
+                </div>
+
+                <div class="d-flex flex-row column-gap-3">
+                    <button mat-stroked-button color="primary" matStepperPrevious>
+                        Atrás
+                    </button>
+                    <button mat-flat-button 
+                            (click)="mostrarValorEtapaForm(secondFormGroup)"
+                            class="bg-success text-white">Confirmar entrega</button>
+                    <button mat-flat-button color="warn" (click)="stepper.reset()">
+                        Cancelar
+                    </button>
+                </div>
+
+                
+
+            </form>
+        </mat-step>
+
+    </mat-stepper>
+</div>

@@ -35,3 +35,21 @@ $frontend1-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($frontend1-theme);
 
+
+
+.disabled-but-information{
+  
+
+  .mdc-text-field--filled.mdc-text-field--disabled{
+    background-color: mat.get-color-from-palette($frontend1-primary, 500);
+    .mdc-floating-label--float-above{
+      color: white;
+    }
+    .mdc-text-field__input{
+      color: white!important;
+    }
+    span{
+      color: white;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 
 <wizard-bar [title]="title"></wizard-bar>
 <div>
-    <mat-stepper orientation="vertical" linear="true" #stepper>
+    <mat-stepper orientation="vertical" linear="false" #stepper>
         <mat-step [stepControl]="firstFormGroup">
             <form [formGroup]="firstFormGroup">
                 <ng-template matStepLabel>Ingrese los datos del Emisor (cliente)</ng-template>
@@ -181,8 +181,8 @@
                         </mat-form-field>
                     </p>
                 </div>
-                <p> Datos complementarios</p>
-                <div class="more-information-package">
+                <p>Detalles del paquete </p>
+                <div class="details-package d-flex flex-row flex-nowrap column-gap-5 full-width-field">
                     <p>
                         <mat-form-field class="em10-width-field">
                             <mat-label>Peso</mat-label>
@@ -190,6 +190,19 @@
                                 formControlName="peso" required />
                         </mat-form-field>
                     </p>
+                    <p class="full-width-field">
+                        <mat-form-field class="full-width-field">
+                            <mat-label>Detalles:</mat-label>
+                            <textarea matInput 
+                            placeholder="Introdusca los detalles sobre el paquete. Sea específico"
+                            formControlName="acercaDelPaquete" class="full-width-field">
+                            </textarea>
+                          </mat-form-field>
+                    </p>
+                    
+                </div>
+                <p>Tipo de paquete</p>
+                <div class="about-package">
                     <p>
                         <mat-form-field class="full-width-field">
                             <mat-label>Prioridad</mat-label>
@@ -234,16 +247,20 @@
 
                 
 
-                <div class="d-flex flex-row column-gap-3">
+                <div class="d-flex flex-row column-gap-3 py-4">
                     <p class="fs-5 d-flex flex-wrap align-content-center">
-                        El precio calculado final es:
+                        El precio calculado final es: 
                     </p>
+                    <!-- <p class="p-3 bg-warning text-white">
+                        {{sixthFormGroup.getRawValue().precioCalculado}}
+                    </p> -->
                     <p>
-                        <mat-form-field class="em10-width-field">
-                            <!-- <mat-label>Precio final </mat-label> -->
+                        <mat-form-field class="em10-width-field disabled-but-information">
+                            <mat-label>Precio final </mat-label>
                             <input matInput 
                             formControlName="precioCalculado"
-                            type="number"  class="text-dark"                      
+                            type="number"  
+                            class="text-dark"                      
                             />
                             <span matTextPrefix>S/.&nbsp;</span>
                         </mat-form-field>
@@ -258,7 +275,7 @@
                             (click)="mostrarValorEtapaForm(sixthFormGroup)"
                             class="bg-success text-white">Finalizar</button>
                     <button mat-flat-button color="warn" (click)="stepper.reset()">
-                        Reset
+                        Cancelar
                     </button>
                 </div>
             </form>

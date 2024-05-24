@@ -45,9 +45,6 @@ export class RegPaquetesEmisorComponent {
   title = 'Registar paquetes de emisor';
 
   
-  @Output() SendTitle = new EventEmitter();
-
-  
   pricePackage = 25;
 
   AutoCompleteControlLugarDestino = new FormControl('');
@@ -84,6 +81,7 @@ export class RegPaquetesEmisorComponent {
     dimension_x: ['', Validators.required],
     dimension_y: ['', Validators.required],
     dimension_z: ['', Validators.required],
+    acercaDelPaquete: ['', Validators.required],
     peso: ['', Validators.required],
     prioridad: ['', Validators.required],
     tipo_encomienda: ['', Validators.required]
@@ -101,7 +99,6 @@ export class RegPaquetesEmisorComponent {
 
   ngOnInit() {
 
-    this.SendTitle.emit(this.title);
 
     this.filteredOptionsSucursal = this.AutoCompleteControlSucursal.valueChanges.pipe(
       startWith(''),
