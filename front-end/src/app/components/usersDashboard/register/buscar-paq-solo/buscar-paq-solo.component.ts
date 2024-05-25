@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { WizardBarComponent } from '../../../artifacts/wizard-bar/wizard-bar.component';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';

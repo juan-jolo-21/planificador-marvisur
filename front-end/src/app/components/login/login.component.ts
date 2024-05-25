@@ -32,12 +32,15 @@ export class LoginComponent {
         switch(data.user_type){
           case "admin":
             urlTree = this.router.createUrlTree(['/admin']);
+            this.router.navigateByUrl('/admin');
             break;
           case "register":
             urlTree = this.router.createUrlTree(['/register']);
+            this.router.navigateByUrl('/register');
             break;
           case "manloader":
             urlTree = this.router.createUrlTree(['/manloader']);
+            this.router.navigateByUrl('/manloader');
             break;
         }
         this.router.navigateByUrl(urlTree);
