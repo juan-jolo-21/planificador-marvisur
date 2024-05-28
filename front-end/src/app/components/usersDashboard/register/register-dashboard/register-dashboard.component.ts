@@ -24,8 +24,8 @@ export class RegisterDashboardComponent {
       directTo: 'BuscarEntregarPaquete'
     },
     {
-      title: 'Buscar paquete únicamente',
-      directTo: 'SoloBuscarPaquete'
+      title: 'Ver paquetes por sede sin entregar',
+      directTo: 'VerPaquetesSinEntregar'
     }
   ]
 }

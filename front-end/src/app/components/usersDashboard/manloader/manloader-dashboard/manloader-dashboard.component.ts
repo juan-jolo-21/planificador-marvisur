@@ -14,27 +14,34 @@ import { RouterLinkWithHref } from '@angular/router';
 export class ManloaderDashboardComponent {
   optionList: OptionButtom[] = [
     {
-      title: 'Descargar contenedor',
-      directTo: 'DescargarContenedor'
-    },
-    {
-      title: 'Ver paquetes por sede sin entregar',
-      directTo: 'VerPaquetesPorSedeSinEntregar'
-    },
-    {
-      title: 'Ver paquetes recibidos',
-      directTo: 'VerPaquetesRecibidos'
+      title: 'Liberar contenedor',
+      directTo: 'LiberarContenedor'
     },
     {
       title: 'Asignar paquetes a contenedor',
       directTo: 'AsignarPaquetesContenedor'
     },
     {
-      title: 'Marcar llegada de contenedor',
-      directTo: 'MarcarLlegadaContenedor'
-    },{
+      title: 'Finalizar carga de paquetes en contenedor',
+      directTo: 'FinalizarCargaPaquetes'
+    },
+    {
       title: 'Marcar partida de contenedor',
       directTo: 'MarcarPartidaContenedor'
+    },
+    {
+      title: 'Marcar llegada de contenedor',
+      directTo: 'MarcarLlegadaContenedor'
+    },
+    {
+      title: 'Descargar contenedor',
+      directTo: 'DescargarContenedor'
+    },
+    {
+      title: 'Ver paquetes por sede sin entregar',
+      directTo: 'VerPaquetesPorSedeSinEntregar'
     }
+    
+    
   ]
 }

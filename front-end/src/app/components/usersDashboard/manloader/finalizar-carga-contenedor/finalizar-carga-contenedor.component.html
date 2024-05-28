@@ -23,9 +23,9 @@
   
         <!-- Name Column -->
         <ng-container matColumnDef="Origen">
-          <th mat-header-cell *matHeaderCellDef>Sucursal de origen del contenedor</th>
+          <th mat-header-cell *matHeaderCellDef>Sucursal de destino del contenedor</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.now_name_branch | titlecase}}
+            {{ element.destination_name_branch | titlecase }}
           </td>
         </ng-container>
 

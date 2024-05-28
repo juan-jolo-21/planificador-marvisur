@@ -1,1 +1,53 @@
-<p>ver-paquetes-por-sede-sin-entregar works!</p>
+<wizard-bar [title]="title"></wizard-bar>
+
+<div class="d-flex flex-column align-items-center py-4">
+  <div style="width: 70%">
+    <mat-form-field>
+      <mat-label>Buscar paquete</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Puede buscar por DNI, receptor o detalle del paquete"
+        #input
+      />
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Weight Column -->
+      <ng-container matColumnDef="DNI">
+        <th mat-header-cell *matHeaderCellDef>DNI receptor</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.reciever_person_dni }}
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="NCR">
+        <th mat-header-cell *matHeaderCellDef>Nombres  y apellidos del eceptor</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.reciever_person_complete_name }}
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="About">
+        <th mat-header-cell *matHeaderCellDef>Detalles</th>
+        <td mat-cell *matCellDef="let element">{{ element.about }}</td>
+      </ng-container>
+
+      <tr mat-header-row 
+      class = "bg-warning"
+      *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="rowClicked(row)"
+      ></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No se encontrarion datos</td>
+      </tr>
+    </table>
+  </div>
+</div>

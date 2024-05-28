@@ -1,1 +1,49 @@
-<p>marcar-llegada-contenedor works!</p>
+<wizard-bar [title]="title"></wizard-bar>
+
+<div class="d-flex flex-column align-items-center py-4">
+    <div style="width: 70%">
+      <mat-form-field>
+        <mat-label>Buscar contenedor por número de placa</mat-label>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Recuerde que la placa es del tractocamion en caso el contenedor no forme parte del vehiculo"
+          #input
+        />
+      </mat-form-field>
+  
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Placa">
+          <th mat-header-cell *matHeaderCellDef>Placa</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.truck_license_plate }}
+          </td>
+        </ng-container>
+  
+        <!-- Name Column -->
+        <ng-container matColumnDef="Origen">
+          <th mat-header-cell *matHeaderCellDef>Sucursal de origen del contenedor</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.now_name_branch | titlecase}}
+          </td>
+        </ng-container>
+
+  
+        <tr mat-header-row 
+        class = "bg-warning"
+        *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="rowClicked(row)"
+        ></tr>
+  
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell bg-warning-subtle text-danger" colspan="4">No se encontrarion datos</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
