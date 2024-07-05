@@ -56,5 +56,19 @@ p {
   gap:6px 0px;
 }
 
+.buttom-from-navbar{
+  border-color: var(--bs-primary-bg-subtle);
+  border-width: 4px;
+  background-color: var(--bs-primary-bg-subtle);
+  transition: .3s all;
+}
+
+.buttom-from-navbar:focus{
+  box-shadow: 0 0 0 0;
+}
+
+.buttom-from-navbar:hover{
+  border-color:var(--bs-primary) ;
+}
 
 

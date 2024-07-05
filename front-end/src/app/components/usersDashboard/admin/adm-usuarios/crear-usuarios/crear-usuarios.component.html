@@ -1,1 +1,57 @@
-<p>crear-usuarios works!</p>
+<wizard-bar [title]="title"></wizard-bar>
+<!-- <div style = "background-color: aquamarine; height: 150px;">
+    <button class="btn btn-lg btn-outline-primary" (click)="openModal()">Launch demo modal</button>
+</div> -->
+<div class="px-4 py-3">
+    <form [formGroup]="firstFormGroup">
+        <p>Ingrese los datos del nuevo usuario</p>
+        <p>
+            <mat-form-field class="half-width-field">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Nombres completos" formControlName="NombreUsuario" required />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="half-width-field">
+                <mat-label>Apellido Paterno</mat-label>
+                <input matInput formControlName="APUsuario" required />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="half-width-field">
+                <mat-label>Apellido Materno</mat-label>
+                <input matInput formControlName="AMUsuario" required />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="half-width-field">
+                <mat-label>DNI</mat-label>
+                <input matInput type="number" min="00010000" max="99999999" inputmode="numeric" pattern="[0-9]*"
+                    maxlength="8" formControlName="DniUsuario" required />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="half-width-field">
+                <mat-label>Escoger sede</mat-label>
+                <input type="text" 
+                    placeholder="Seleccione la sede a la cual va a pertenecer el usuario" 
+                    matInput
+                    [matAutocomplete]="autoSucursalUsuario" 
+                    formControlName="SucursalUsuario" 
+                    required>
+                <mat-autocomplete #autoSucursalUsuario="matAutocomplete">
+                    @for (option of filteredOptionsSucursalUsuario | async; track option) {
+                    <mat-option [value]="option">{{option}}</mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+        </p>
+
+        <div>
+            <button mat-flat-button color="primary"
+                (click)="mostrarValorEtapaForm(firstFormGroup)">
+                Finalizar registro
+            </button>
+        </div>
+    </form>
+</div>

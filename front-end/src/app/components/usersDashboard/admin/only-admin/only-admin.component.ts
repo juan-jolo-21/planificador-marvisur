@@ -25,7 +25,7 @@ export class OnlyAdminComponent {
     },
     {
       title: 'Administrar Sucursales',
-      directTo: 'testing'
+      directTo: 'AdministrarSucursales'
     },
     
   ]

@@ -7,6 +7,8 @@ import { AdmCamionesDashboardComponent } from './adm-camiones/adm-camiones-dashb
 import { AdmCamionesLayoutOptionsComponent } from './adm-camiones/adm-camiones-layout-options/adm-camiones-layout-options.component';
 import { AdmContenedoresDashboardComponent } from './adm-contenedores/adm-contenedores-dashboard/adm-contenedores-dashboard.component';
 import { AdmContenedoresLayoutOptionsComponent } from './adm-contenedores/adm-contenedores-layout-options/adm-contenedores-layout-options.component';
+import { AdmSucursalesDashboardComponent } from './adm-sucursales/adm-sucursales-dashboard/adm-sucursales-dashboard.component';
+import { AdmSucursalesLayoutOptionsComponent } from './adm-sucursales/adm-sucursales-layout-options/adm-sucursales-layout-options.component';
 
 
 
@@ -26,6 +28,10 @@ let restOfAdminRoutes: Routes = [
             {
                 path:'AdministrarContenedores',
                 component: AdmContenedoresDashboardComponent
+            },
+            {
+                path:'AdministrarSucursales',
+                component: AdmSucursalesDashboardComponent
             }
 
         ]
@@ -44,6 +50,11 @@ let restOfAdminRoutes: Routes = [
         path: 'AdministrarContenedores',
         component: AdmContenedoresLayoutOptionsComponent,
         loadChildren: () => import('./adm-contenedores/adm-contenedores.routes').then(m=>m.AdmContenedoresRoutes)
+    },
+    {
+        path: 'AdministrarSucursales',
+        component: AdmSucursalesLayoutOptionsComponent,
+        loadChildren: () => import ('./adm-sucursales/adm-sucursales.routes').then(m=>m.AdmSucursalesRoutes)
     }
 ];
 

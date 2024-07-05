@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output, signal } from '@angular/core';
+import {AutocompleteFilterService }from '../../../../services/autocomplete-filter.service'
 
 
 import {
@@ -102,30 +103,16 @@ export class RegPaquetesEmisorComponent {
 
     this.filteredOptionsSucursal = this.AutoCompleteControlSucursal.valueChanges.pipe(
       startWith(''),
-      map((value) => this.filterSucursal(value || ''))
+      map((value) => AutocompleteFilterService.filterFunction(value || '',this.optionsSucursal))
     );
 
     this.filteredOptionsLugarDestino = this.AutoCompleteControlLugarDestino.valueChanges.pipe(
       startWith(''),
-      map((value) => this.filterLugarDestino(value || ''))
+      map((value) => AutocompleteFilterService.filterFunction(value || '',this.optionsLugarDestino))
     );
 
     
   }
 
-  private filterLugarDestino(value: string): string[] {
-    const filterValue = value.toLowerCase();
 
-    return this.optionsLugarDestino.filter((option) =>
-      option.toLowerCase().includes(filterValue)
-    );
-  }
-
-  private filterSucursal(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.optionsSucursal.filter((option) =>
-      option.toLowerCase().includes(filterValue)
-    );
-  }
 }
