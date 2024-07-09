@@ -9,7 +9,7 @@ module.exports = async () => {
     */
     try {
         await mongoose.connect(dbURL);
-        console.log(`Mongo connected on ${dbURL}`);
+        console.log(`Auth service: Mongo connected on ${dbURL}`);
     } catch (err) {
         console.log(`Connection has error: ${err} `)
     }
