@@ -8,7 +8,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AsyncPipe, Location } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { EMPTY, Observable, of } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, concatMap, map, startWith, switchMap } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { DataAndConfirmModalComponent } from '../../../../artifacts/modals/data-and-confirm-modal/data-and-confirm-modal.component';
 import { AutocompleteFilterService } from '../../../../../services/autocomplete-filter.service';
@@ -35,7 +35,7 @@ import { BranchesService } from '../../../../../services/branches.service';
   templateUrl: './crear-usuarios.component.html',
   styleUrl: './crear-usuarios.component.css'
 })
-export class CrearUsuariosComponent implements OnInit{
+export class CrearUsuariosComponent {
   title = 'Crear usuarios del sistema';
 
 
@@ -72,18 +72,18 @@ export class CrearUsuariosComponent implements OnInit{
   ngOnInit(){
 
     this.branchesServices.getBranchesNames().pipe(
-      switchMap(branches =>{
-        let testinglittle = branches.map((branch: { name_branch: any })=> branch.name_branch);
+      concatMap(branches =>{
+        let testingValues = branches.map((branch: { name_branch: any })=> branch.name_branch);
         //this.optionsSucursalUsuario = branches.map((branch: { name_branch: any })=> branch.name_branch);
-        this.optionsSucursalUsuario = testinglittle;
-        this.testingString = testinglittle;
+        this.optionsSucursalUsuario = testingValues;
+        this.testingString = testingValues;
         return this.AutoCompleteControlSucursalUsuario.valueChanges.pipe(
           startWith(''),
-          map((value) => AutocompleteFilterService.filterFunction(value || '',this.optionsSucursalUsuario))
+          map((value) => this.filterSucursalUsuario(value || ''))
         );
       }),catchError(err =>{
         console.log(err);
-        return EMPTY;
+        return of([]);
       })
     ).subscribe(filteredOptions=>{
       this.filteredOptionsSucursalUsuario = of(filteredOptions);
@@ -98,7 +98,7 @@ export class CrearUsuariosComponent implements OnInit{
 
     this.filteredOptionsPositionEmployee = this.AutoCompleteControlPositionEmployee.valueChanges.pipe(
       startWith(''),
-      map((value)=>AutocompleteFilterService.filterFunction(value || '',this.optionsPositionEmployee))
+      map(value=>this.filterPositionEmployee(value || ''))
     )
 
 
@@ -148,5 +148,21 @@ export class CrearUsuariosComponent implements OnInit{
   //   return valuesbranch;
   // }
 
+  private filterSucursalUsuario(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.optionsSucursalUsuario.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
+  }
+
+
+  private filterPositionEmployee(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.optionsPositionEmployee.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
+  }
 
 }
