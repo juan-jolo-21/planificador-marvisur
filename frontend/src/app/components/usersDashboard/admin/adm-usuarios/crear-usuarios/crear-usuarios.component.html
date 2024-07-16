@@ -2,6 +2,10 @@
 <!-- <div style = "background-color: aquamarine; height: 150px;">
     <button class="btn btn-lg btn-outline-primary" (click)="openModal()">Launch demo modal</button>
 </div> -->
+
+<div class="px-2" style="background-color: steelblue; color:white">
+    {{testingString}}
+</div>
 <div class="px-4 py-3">
     <form [formGroup]="firstFormGroup">
         <p>Ingrese los datos del nuevo usuario</p>
@@ -41,6 +45,23 @@
                     required>
                 <mat-autocomplete #autoSucursalUsuario="matAutocomplete">
                     @for (option of filteredOptionsSucursalUsuario | async; track option) {
+                    <mat-option [value]="option">{{option}}</mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field class="half-width-field">
+                <mat-label>Escoger posición</mat-label>
+                <input type="text" 
+                    placeholder="Seleccione la posición en la empresa del nuevo usuario" 
+                    matInput
+                    [matAutocomplete]="autoPositionEmployee" 
+                    formControlName="PositionEmployee" 
+                    required>
+                <mat-autocomplete #autoPositionEmployee="matAutocomplete">
+                    @for (option of filteredOptionsPositionEmployee | async; track option) {
                     <mat-option [value]="option">{{option}}</mat-option>
                     }
                 </mat-autocomplete>

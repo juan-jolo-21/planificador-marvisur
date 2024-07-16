@@ -17,23 +17,29 @@ const personSchema = new Schema({
         type: String,
         required: true,
         trim : true
-    }
-},{
-    _id: false
-});
-
-const employeeSchema = new Schema({
+    },
     dni: {
         type: Number,
         required: true,
         min: 40000000, // Valor mínimo de 8 cifras
         max: 80000000 // Valor máximo de 8 cifras
     },
+},{
+    _id: false
+});
+
+const employeeSchema = new Schema({
+
     person: {
         type: personSchema,
         required: true
     },
     name_branch: {
+        type: String,
+        required: true,
+        trim : true
+    },
+    position: {
         type: String,
         required: true,
         trim : true

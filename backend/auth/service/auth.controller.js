@@ -18,11 +18,11 @@ const AuthController = {
                 password: req.body.password,
                 date_register: req.body.date_register,
                 employee: {
-                    dni: req.body.employee.dni,
                     person: {
                         name: req.body.employee.person.name,
                         last_name_1: req.body.employee.person.last_name_1,
-                        last_name_2: req.body.employee.person.last_name_2
+                        last_name_2: req.body.employee.person.last_name_2,
+                        dni: req.body.employee.person.dni,
                     },
                     name_branch: req.body.employee.name_branch
                 }
@@ -65,7 +65,7 @@ const AuthController = {
                     const expiresIn = 24*60*60;
                     const accessToken = jwt.sign({id: user.id}, SECRET_KEY, {expiresIn: expiresIn});
                     //res.send(user.email);
-                    //console.log(user);
+                    console.log(user);
                     let dataUserWithToken = {
                         id: user._id,
                         user_type: user.user_type,

@@ -27,4 +27,4 @@ router.get(
 )
 
 
-app.listen(3000, ()=>console.log(`server running on port ${properties.PORT}`));
+app.listen(properties.PORT, ()=>console.log(`auth service running on port ${properties.PORT}`));

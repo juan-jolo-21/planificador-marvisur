@@ -32,36 +32,37 @@ export class AuthService {
     console.log('prueba de inicio token');
     // console.log(localStorage.getItem('token'));
     return this.http.post<JwtResponse>(`${this.AUTH_SERVER}/login`, someUser)
-      . pipe(tap(
+      .pipe(tap(
         (jwtResponse: JwtResponse) => {
-        // Almacenar el usuario y el token JWT en el almacenamiento local
-        let anotherUser, 
-        tokenAnotherUser, 
-        timestampAnotherUser :  any;
-        if (jwtResponse) {
-          anotherUser = {
-            id: jwtResponse.id,
-            user_type: jwtResponse.user_type,
-            email: jwtResponse.email,
-            employee: jwtResponse.employee
-          }
-          tokenAnotherUser= jwtResponse.accessToken;
-          timestampAnotherUser= jwtResponse.expiresIn;
-        }else{
-          anotherUser = {
-            id: 0,
-            name: 'not user yet, please verify your credentials'
-          };
-          tokenAnotherUser = 'no token'; 
-          timestampAnotherUser = 0;
-        }
-        this.token= tokenAnotherUser;
-        // console.log(this.token);
-        localStorage.setItem('currentUser', JSON.stringify(anotherUser));
-        localStorage.setItem('token', tokenAnotherUser as string);
-        localStorage.setItem('timestamp', timestampAnotherUser);
+            // Almacenar el usuario y el token JWT en el almacenamiento local
+            let anotherUser, 
+            tokenAnotherUser, 
+            timestampAnotherUser :  any;
+            if (jwtResponse) {
+              anotherUser = {
+                id: jwtResponse.id,
+                user_type: jwtResponse.user_type,
+                email: jwtResponse.email,
+                employee: jwtResponse.employee
+              }
+              tokenAnotherUser= jwtResponse.accessToken;
+              timestampAnotherUser= jwtResponse.expiresIn;
+            }else{
+              anotherUser = {
+                id: 0,
+                name: 'not user yet, please verify your credentials'
+              };
+              tokenAnotherUser = 'no token'; 
+              timestampAnotherUser = 0;
+            }
+            this.token= tokenAnotherUser;
+            // console.log(this.token);
+            localStorage.setItem('currentUser', JSON.stringify(anotherUser));
+            localStorage.setItem('token', tokenAnotherUser as string);
+            localStorage.setItem('timestamp', timestampAnotherUser);
 
-      }));
+        }
+      ));
  }
 
  logout() {
