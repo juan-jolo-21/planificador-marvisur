@@ -14,6 +14,7 @@ import { DataAndConfirmModalComponent } from '../../../../artifacts/modals/data-
 import { AutocompleteFilterService } from '../../../../../services/autocomplete-filter.service';
 import { Branch } from '../../../../../models/branch';
 import { BranchesService } from '../../../../../services/branches.service';
+import { UserManageService } from '../../../../../services/user-manage.service';
 
 
 
@@ -49,12 +50,10 @@ export class CrearUsuariosComponent {
   filteredOptionsSucursalUsuario?: Observable<string[]>;
   filteredOptionsPositionEmployee?: Observable<string[]>;
 
-  //private optionsSucursalUsuario: string[] = ['SJL 5', 'Los olivos 2', 'Cerro Juli', 'Lima norte', 'Lima sur'];
+
   private optionsSucursalUsuario: string[] = [];
   private optionsPositionEmployee: string[] = ['empacador','registrador','supervisor de descargas','digitador'];
 
-
-  public testingString: any[]=[];
 
   firstFormGroup = this._formBuilder.group({
     NombreUsuario: ['', Validators.required],
@@ -67,16 +66,15 @@ export class CrearUsuariosComponent {
 
   constructor(private _formBuilder: FormBuilder,
               private location: Location, 
-              private branchesServices: BranchesService) {}
+              private branchesServices: BranchesService,
+              private userManageService: UserManageService
+            ) {}
 
   ngOnInit(){
 
     this.branchesServices.getBranchesNames().pipe(
       concatMap(branches =>{
-        let testingValues = branches.map((branch: { name_branch: any })=> branch.name_branch);
-        //this.optionsSucursalUsuario = branches.map((branch: { name_branch: any })=> branch.name_branch);
-        this.optionsSucursalUsuario = testingValues;
-        this.testingString = testingValues;
+        this.optionsSucursalUsuario = branches.map((branch: { name_branch: any })=> branch.name_branch);
         return this.AutoCompleteControlSucursalUsuario.valueChanges.pipe(
           startWith(''),
           map((value) => this.filterSucursalUsuario(value || ''))
@@ -109,8 +107,10 @@ export class CrearUsuariosComponent {
   async mostrarValorEtapaForm(etapa : FormGroup){
     
     if(this.firstFormGroup.valid){
-      
+
+      await this.postUser(etapa.value);
       await this.openModal(JSON.stringify(etapa.value,null,2));
+
       this.location.back();
     }
     else{
@@ -130,23 +130,16 @@ export class CrearUsuariosComponent {
     return modalRef.result; 
 	}
 
-  // valuesFromBranches(): string [] {
-  //   let valuesbranch: string [] = [];
-  //   this.branchesServices.getBranchesNames().subscribe({
-  //     next: (result)=>{
-  //       for(let oneResult of result){
-  //         valuesbranch.push(oneResult.name_branch);
-  //       };
-  //       this.testingString = valuesbranch;
-  //       console.log('------');
-  //       console.log(valuesbranch);
-  //     },
-  //     error: (err)=>{
-  //       console.log(err);
-  //     }
-  //   });
-  //   return valuesbranch;
-  // }
+  async postUser(jsonResponse: any) {
+    this.userManageService.postUser(jsonResponse).subscribe({
+      next: (data)=>{
+        console.log('posteado correactamente a API');
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
 
   private filterSucursalUsuario(value: string): string[] {
     const filterValue = value.toLowerCase();

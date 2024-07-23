@@ -13,7 +13,7 @@ export class BranchesService {
    }
 
   getBranchesNames(): Observable<any> {
-    return this.httpClient.get<any>(`${this.API_SERVER}/branches/names`).pipe(res=>res);
+    return this.httpClient.get<any>(`${this.API_SERVER}/branches/names`);
   }
 }
  

@@ -19,5 +19,6 @@ app.use('/',router);
 router.get('/',(req,res)=>res.send('engine service is ready'))
 
 app.use('/branches',require('./routes/branch.routes'))
+app.use('/users',require('./routes/user.routes'))
 
 app.listen(properties.PORT, ()=>console.log(`engine service running on port ${properties.PORT}`));

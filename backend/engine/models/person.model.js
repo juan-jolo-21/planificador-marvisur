@@ -22,7 +22,7 @@ const personSchema = new Schema({
         type: Number,
         required: true,
         min: 40000000, // Valor mínimo de 8 cifras
-        max: 80000000 // Valor máximo de 8 cifras
+        max: 99999999 // Valor máximo de 8 cifras
     },
 },{
     _id: false

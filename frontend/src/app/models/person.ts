@@ -1,10 +1,6 @@
 export interface Person {
-    Nombre?: string,
-    APP ?: string,
-    APM ?: string,
+    name?: string,
+    last_name_1 ?: string,
+    last_name_2 ?: string,
     dni ?: number
-
-    // public getCompleteName() :string {
-    //     return `${this.Nombre} ${this.APP} ${this.APM} ${this.dni}`;
-    // }
 }
